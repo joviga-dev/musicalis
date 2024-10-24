@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.musicalis.musicalis.dto.atualizacao.AtualizarFrequenciaDto;
 import br.com.musicalis.musicalis.dto.cadastro.CadastrarFrequenciaDto;
 import br.com.musicalis.musicalis.dto.listagem.ListarFrequenciasDto;
-import br.com.musicalis.musicalis.entity.Frequencia;
 import br.com.musicalis.musicalis.service.FrequenciaService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
