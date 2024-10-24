@@ -14,38 +14,34 @@ import java.util.List;
 
 @Service
 public class AlunoService {
-@Autowired
-private AlunoRepository alunoRepository;
+    @Autowired
+    private AlunoRepository alunoRepository;
 
     public void save(Aluno aluno) {
         this.alunoRepository.save(aluno);
     }
-    
+
     public void delete(Long id) {
-        Optional<Aluno> aluno = this.alunoRepository.findById(id);
-        if(aluno.isPresent()) {
-            aluno.get().setStatus(false);
-            this.alunoRepository.save(aluno.get());
-        } else {
-            throw new EntityNotFoundException("Aluno não encontrado");
-        }
+        Aluno aluno = this.alunoRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Aluno não encontrado"));
+        aluno.setStatus(false);
+        this.alunoRepository.save(aluno);
+
     }
 
     public void atualizar(AtualizarAlunoDto dto) {
-        Optional<Aluno> aluno = this.alunoRepository.findById(dto.id());
-        if(aluno.isPresent()) {
-            Aluno alunoEncontrado = aluno.get();
-            alunoEncontrado.setCpf(dto.cpf());
-            alunoEncontrado.setDtNasc(dto.dtNasc());
-            alunoEncontrado.setGrupo(dto.grupo());
-            alunoEncontrado.setInstrumento(dto.instrumento());
-            alunoEncontrado.setMatricula(dto.matricula());
-            alunoEncontrado.setNome(dto.nome());
-            alunoEncontrado.setRg(dto.rg());
-            this.alunoRepository.save(alunoEncontrado);
-        } else {
-            throw new EntityNotFoundException("Aluno não encontrado");
-        }
+        Aluno aluno = this.alunoRepository.findById(dto.id())
+                .orElseThrow(() -> new EntityNotFoundException("Aluno não encontrado"));
+
+        aluno.setCpf(dto.cpf());
+        aluno.setDtNasc(dto.dtNasc());
+        aluno.setGrupo(dto.grupo());
+        aluno.setInstrumento(dto.instrumento());
+        aluno.setMatricula(dto.matricula());
+        aluno.setNome(dto.nome());
+        aluno.setRg(dto.rg());
+        this.alunoRepository.save(aluno);
+
     }
 
     public List<ListarAlunoDto> listarAlunos(Character grupo) {

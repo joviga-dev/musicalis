@@ -1,8 +1,10 @@
 package br.com.musicalis.musicalis.service;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.musicalis.musicalis.dto.atualizacao.AtualizarFrequenciaDto;
 import br.com.musicalis.musicalis.dto.cadastro.CadastrarFrequenciaDto;
 import br.com.musicalis.musicalis.dto.listagem.ListarFrequenciasDto;
 import br.com.musicalis.musicalis.entity.Aluno;
@@ -36,5 +38,32 @@ public class FrequenciaService {
 
     public List<ListarFrequenciasDto> listarFrequencias(int limit, int offset) {
         return frequenciaRepository.listarFrequencias(limit,offset);
+    }
+
+    public void atualizar(AtualizarFrequenciaDto dto) {
+        
+        Frequencia frequencia = frequenciaRepository.findById(dto.id()).orElseThrow(() -> new EntityNotFoundException("Frequencia não encontrada"));
+
+        if(dto.idAluno() != null && dto.idAluno() != frequencia.getAluno().getId()) {
+            Aluno aluno = alunoRepository.findById(dto.idAluno()).orElseThrow(() -> new EntityNotFoundException("Aluno não encontrado"));
+            frequencia.setAluno(aluno);
+        }
+
+        if(dto.idProfessor() != null && dto.idProfessor() != frequencia.getProfessor().getId()) {
+            Professor professor = professorRepository.findById(dto.idProfessor()).orElseThrow(() -> new EntityNotFoundException("Professor não encontrado"));
+            frequencia.setProfessor(professor);
+        }
+
+        frequencia.setData(dto.data());
+        frequencia.setPresenca(dto.presenca());
+        frequencia.setGrupo(dto.grupo());
+        frequencia.setTipo(dto.tipo());
+
+        frequenciaRepository.save(frequencia);
+    }
+
+    public void deletar(Long id) {
+        Frequencia frequencia = frequenciaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Frequencia não encontrada"));
+        frequenciaRepository.delete(frequencia);
     }
 }

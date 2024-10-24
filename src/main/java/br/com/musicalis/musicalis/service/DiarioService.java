@@ -38,7 +38,7 @@ public class DiarioService {
     public void update(AtualizarDiarioDto dto) {
         Diario diario = diarioRepository.findById(dto.id()).orElseThrow(() -> new EntityNotFoundException("Diario nao encontrado"));
         Aluno aluno = new Aluno();
-        if(dto.idAluno() != null) {
+        if(dto.idAluno() != null && dto.idAluno() != diario.getAluno().getId()) {
             aluno = alunoRepository.findById(dto.idAluno()).orElseThrow(() -> new EntityNotFoundException("Aluno não encontrado"));     
             diario.setAluno(aluno);   
         }
