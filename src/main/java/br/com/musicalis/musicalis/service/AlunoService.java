@@ -1,6 +1,7 @@
 package br.com.musicalis.musicalis.service;
 
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,6 @@ import java.util.List;
 public class AlunoService {
     @Autowired
     private AlunoRepository alunoRepository;
-
     public void save(Aluno aluno) {
         this.alunoRepository.save(aluno);
     }

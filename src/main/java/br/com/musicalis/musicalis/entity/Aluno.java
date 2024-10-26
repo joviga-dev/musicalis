@@ -43,6 +43,9 @@ public class Aluno {
     @OneToMany(mappedBy = "aluno")
     private List<Frequencia> frequencias;
 
+    @OneToMany
+    private List<Patrimonio> patrimonios;
+
     public Aluno(CadastrarAlunoDto dto) {
         this.cpf = dto.cpf();
         this.dtNasc = dto.dtNasc();
