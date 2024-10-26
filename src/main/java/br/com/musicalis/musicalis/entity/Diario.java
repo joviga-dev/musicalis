@@ -3,14 +3,7 @@ package br.com.musicalis.musicalis.entity;
 import java.time.LocalDateTime;
 
 import br.com.musicalis.musicalis.dto.cadastro.CadastrarDiarioDto;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -29,7 +22,7 @@ public class Diario {
     @OneToOne
     @JoinColumn(name = "fk_aluno")
     private Aluno aluno;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "fk_professor")
     private Professor professor;
     private String obs;

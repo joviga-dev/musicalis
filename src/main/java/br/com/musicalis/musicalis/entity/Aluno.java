@@ -3,13 +3,7 @@ package br.com.musicalis.musicalis.entity;
 import java.time.LocalDate;
 import java.util.List;
 import br.com.musicalis.musicalis.dto.cadastro.CadastrarAlunoDto;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -43,10 +37,10 @@ public class Aluno {
     @ManyToMany(mappedBy = "alunos")
     private List<Turma> turmas;
 
-    @ManyToMany(mappedBy = "aluno")
+    @OneToMany(mappedBy = "aluno")
     private List<Avaliacao> avaliacoes;
 
-    @ManyToMany(mappedBy = "aluno")
+    @OneToMany(mappedBy = "aluno")
     private List<Frequencia> frequencias;
 
     public Aluno(CadastrarAlunoDto dto) {

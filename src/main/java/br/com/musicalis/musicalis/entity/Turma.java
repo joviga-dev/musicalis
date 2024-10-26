@@ -1,19 +1,11 @@
 package br.com.musicalis.musicalis.entity;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 import br.com.musicalis.musicalis.dto.cadastro.CadastrarTurmaDto;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -50,5 +42,16 @@ public class Turma {
         this.dtHora = dto.dtHora();
         this.grupo = dto.grupo();
         this.nome = dto.nome();
+    }
+
+    @ManyToMany(mappedBy = "turmas")
+    private Collection<Aluno> aluno;
+
+    public Collection<Aluno> getAluno() {
+        return aluno;
+    }
+
+    public void setAluno(Collection<Aluno> aluno) {
+        this.aluno = aluno;
     }
 }

@@ -36,15 +36,17 @@ public class Professor {
     private String cpf;
     @Column(name = "status")
     private boolean status;
+    @Column(name = "login")
+    private String login;
+    @Column(name = "senha")
+    private String senha;
 
     @OneToMany(mappedBy = "professor")
     private List<Turma> turmas;
-    
+
     @OneToMany(mappedBy = "professor")
     private List<Diario> diarios;
 
-
-    
     // @ManyToMany(mappedBy = "aluno")
     // private List<Avaliacao> avaliacoes;
 
