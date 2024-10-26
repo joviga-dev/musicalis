@@ -3,6 +3,7 @@ package br.com.musicalis.musicalis.entity;
 import java.time.LocalDate;
 import java.util.List;
 
+import br.com.musicalis.musicalis.dto.cadastro.CadastrarProfessorDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,10 +12,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity(name = "Professor")
 @Table(name = "professores")
 @Data
+@NoArgsConstructor
 public class Professor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,4 +55,17 @@ public class Professor {
 
     // @ManyToMany(mappedBy = "aluno")
     // private List<Frequencia> frequencias;
+
+    public Professor(CadastrarProfessorDto dto){
+        this.nome = dto.nome();
+        this.dtNasc = dto.dtNasc();
+        this.cpf = dto.cpf();
+        this.rg = dto.rg();
+        this.grupo = dto.grupo();
+        this.instrumento = dto.instrumento();
+        this.login = dto.login();
+        this.senha = dto.senha();
+        this.status = true;
+        this.matricula = dto.matricula();
+    }
 }
